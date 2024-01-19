@@ -4,11 +4,13 @@
 #include <BLEServer.h>
 #include "class/callback.h"
 #include "class/sm.h"
+#include "class/timer.h"
 
 #define SERVICE_UUID        "4fafc201-1fb5-459e-8fcc-c5c9c331914b"
 #define CHARACTERISTIC_UUID "beb5483e-36e1-4688-b7f5-ea07361b26a8"
 
 BLECharacteristic *pCharacteristic; // Make global
+Timer timer;
 
 void setup() {  
   Serial.begin(115200);
@@ -37,15 +39,17 @@ void setup() {
   pAdvertising->setMinPreferred(0x12);
   BLEDevice::startAdvertising();
   Serial.println("Characteristic defined! Now you can read it in your phone!");
+
+  // timer setup
+  timer.start();
 }
 
 void loop() {
-  // Example: Update value every second
-  static unsigned long lastUpdate = 0;
-  if (millis() - lastUpdate > 1000) {
-    lastUpdate = millis();
+  if (timer.elapsed() > 1000) {
+    timer.start();
+
     // Update the value
-    String newValue = "Time since start: " + String(millis()/1000) + " seconds";
+    String newValue = "hello";
     pCharacteristic->setValue(newValue.c_str());
     
     // Notify the client

@@ -10,6 +10,13 @@ enum State {
     DISCONNECTED,
 };
 
+String state_names[] = {
+    "UNKNOWN",
+    "IDLE",
+    "CONNECTED",
+    "DISCONNECTED",
+};
+
 class Fsm {
     State _current_state = UNKNOWN;
 public:

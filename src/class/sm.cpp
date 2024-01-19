@@ -17,5 +17,5 @@ State Fsm::getCurrentState() {
 }
 
 String Fsm::stateToString(State state) {
-    return "UNKNOWN";
+    return state_names[state];
 }
