@@ -21,6 +21,8 @@ private:
 public:
     BLEServerManager();
     void setupBLE();
+    void sendValue(int value);
+    void sendMessage(String message);
 };
 
 #endif // BLE_SERVER_MANAGER_H

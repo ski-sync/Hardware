@@ -29,3 +29,13 @@ void BLEServerManager::setupBLE() {
     BLEDevice::startAdvertising();
     Serial.println("BLE Server setup done");
 }
+
+void BLEServerManager::sendValue(int value) {
+    pCharacteristic->setValue(value);
+    pCharacteristic->notify();
+}
+
+void BLEServerManager::sendMessage(String message) {
+    pCharacteristic->setValue(message.c_str());
+    pCharacteristic->notify();
+}
