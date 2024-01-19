@@ -10,13 +10,6 @@ enum State {
     DISCONNECTED,
 };
 
-String state_names[] = {
-    "UNKNOWN",
-    "IDLE",
-    "CONNECTED",
-    "DISCONNECTED",
-};
-
 class Fsm {
     State _current_state = UNKNOWN;
 public:
@@ -24,5 +17,7 @@ public:
     State getCurrentState();
     static String stateToString(State state);
 };
+
+extern const String state_names[]; // Declaration of the array
 
 #endif // SM_H
