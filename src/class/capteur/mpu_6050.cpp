@@ -1,5 +1,4 @@
 #include "mpu_6050.h"
-#include <class/sm.h>
 
 
 Mpu_6050::Mpu_6050(mpu6050_accel_range_t accel_range) 
@@ -54,10 +53,6 @@ void Mpu_6050::update()
     Serial.print(", Z: ");
     Serial.print(g.gyro.z);
     Serial.println(" rad/s");
-
-    Serial.print("Temperature: ");
-    Serial.print(temp.temperature);
-    Serial.println(" degC");
 
     Serial.println("");
 }
