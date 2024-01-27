@@ -2,8 +2,8 @@
 #include "class/sm.h"
 #include "class/timer.h"
 #include "class/BLE/BLEServerManager.h"
-#include "class/capteur/mpu_6050.h"
-#include "class/capteur/bme_280.h"
+#include "component/mpu_6050.h"
+#include "component/bme_280.h"
 
 BLEServerManager bleServerManager;
 Fsm fsm;
