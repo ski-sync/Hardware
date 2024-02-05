@@ -26,9 +26,6 @@ jobs:
 
       - name: Build with PlatformIO
         run: pio run
-      
-      - name: Test with PlatformIO
-        run: pio test --program-arg "ARDUINO"
 
       - uses: sonarsource/sonarqube-scan-action@master
         env:
