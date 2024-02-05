@@ -5,6 +5,12 @@
 // TEST(...)
 // TEST_F(...)
 
+TEST(DummyTest, ShouldPass)
+{
+    EXPECT_EQ(1, 1);
+}
+
+
 #if defined(ARDUINO)
 #include <Arduino.h>
 
