@@ -1,9 +1,9 @@
 #include <Arduino.h>
 #include "class/sm.h"
 #include "class/timer.h"
-#include "class/BLE/BLEServerManager.h"
-#include "component/mpu_6050.h"
-#include "component/bme_280.h"
+#include "component/BLE/BLEServerManager.h"
+#include "component/mpu_6050/mpu_6050.h"
+#include "component/bme_280/bme_280.h"
 
 BLEServerManager bleServerManager;
 Fsm fsm;
