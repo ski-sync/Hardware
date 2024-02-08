@@ -3,12 +3,17 @@
 
 
 #include <Arduino.h>
+#include <Adafruit_GPS.h>
+
+#define GPSECHO true
 
 class GPS {
+    Adafruit_GPS GPSModule;
 public:
     GPS();
     void setup();
     void update();
+    void printData();
 };
 
 

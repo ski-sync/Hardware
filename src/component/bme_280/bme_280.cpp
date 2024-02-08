@@ -6,27 +6,27 @@ Bme_280::Bme_280() {
 
 void Bme_280::setup() {
     while (!_bme.begin()) {
-        Serial.println("Could not find a valid BME280 sensor, check wiring!");
+        Serial1.println("Could not find a valid BME280 sensor, check wiring!");
         delay(1000);
     }
 }
 
 void Bme_280::update() {
-    Serial.print("Temperature = ");
-    Serial.print(_bme.readTemperature());
-    Serial.println(" *C");
+    Serial1.print("Temperature = ");
+    Serial1.print(_bme.readTemperature());
+    Serial1.println(" *C");
 
-    Serial.print("Pressure = ");
-    Serial.print(_bme.readPressure() / 100.0F);
-    Serial.println(" hPa");
+    Serial1.print("Pressure = ");
+    Serial1.print(_bme.readPressure() / 100.0F);
+    Serial1.println(" hPa");
 
-    Serial.print("Approx. Altitude = ");
-    Serial.print(_bme.readAltitude(SEALEVELPRESSURE_HPA));
-    Serial.println(" m");
+    Serial1.print("Approx. Altitude = ");
+    Serial1.print(_bme.readAltitude(SEALEVELPRESSURE_HPA));
+    Serial1.println(" m");
 
-    Serial.print("Humidity = ");
-    Serial.print(_bme.readHumidity());
-    Serial.println(" %");
+    Serial1.print("Humidity = ");
+    Serial1.print(_bme.readHumidity());
+    Serial1.println(" %");
 
-    Serial.println();
+    Serial1.println();
 }

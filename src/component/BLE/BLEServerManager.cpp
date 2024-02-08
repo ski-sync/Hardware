@@ -27,7 +27,7 @@ void BLEServerManager::setupBLE() {
     pAdvertising->setScanResponse(true);
     pAdvertising->setMinPreferred(0x06); // Set the minimum value for advertising
     BLEDevice::startAdvertising();
-    Serial.println("BLE Server setup done");
+    Serial1.println("BLE Server setup done");
 }
 
 void BLEServerManager::sendValue(int value) {
