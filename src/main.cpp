@@ -36,8 +36,6 @@ void setup() {
 
 void loop() {
   gps.update();
-  // bleServerManager.sendValue((int) timer.elapsed());
-  // generate a random number between 0 and 100
   if (timer.elapsed() >= 1000) {
     bleServerManager.sendValue(random(1000));
     mpu_6050.update();
