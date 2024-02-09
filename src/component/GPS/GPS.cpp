@@ -1,7 +1,6 @@
 #include "GPS.h"
 
-#define txPin 17
-#define rxPin 16
+uint32_t timersss = millis();
 
 GPS::GPS()
 {
@@ -34,101 +33,46 @@ void GPS::setup()
 
 void GPS::update()
 {
-  // GPSModule.read();
-  // if (GPSModule.newNMEAreceived()) {
-  //     GPSModule.parse(GPSModule.lastNMEA());
-  // }
-
-  Serial.println("Checking for NMEA data...");
-  if (GPSModule.newNMEAreceived())
-  {
-    auto nmea = GPSModule.lastNMEA();
-    Serial.print("Received NMEA: ");
-    Serial.println(nmea);
-    if (!GPSModule.parse(nmea))
-    {
-      Serial.println("Parsing failed");
-    }
-  }
-  else
-  {
-    Serial.println("No new NMEA data received.");
-  }
-}
-
-void GPS::printData()
-{
-
-  char c = GPSModule.read(); // read data frin GPS main loop
+  char c = GPSModule.read();
 
   if (GPSECHO)
-  {
-    if (c)
-      Serial.print(c);
+    if (c) Serial.print(c);
+
+  if (GPSModule.newNMEAreceived()) {
+    if (!GPSModule.parse(GPSModule.lastNMEA()))
+      return;
   }
 
-  if (GPSModule.newNMEAreceived()) // print the NMEA sentence, or data, cannot listen and catching new sentences
-  {
-    Serial.print(GPSModule.lastNMEA());         // this also sets the newNMEAreceived() flag to false
-    if (!GPSModule.parse(GPSModule.lastNMEA())) // this also sets the newNMEAreceived() flag to false
-      return;                                   // we can fail to parse a sentence in which case we should just wait for another
-  }
-  Serial.print("\nTime: ");
-  if (GPSModule.hour < 10)
-  {
-    Serial.print('0');
-  }
-  Serial.print(GPSModule.hour, DEC);
-  Serial.print(':');
-  if (GPSModule.minute < 10)
-  {
-    Serial.print('0');
-  }
-  Serial.print(GPSModule.minute, DEC);
-  Serial.print(':');
-  if (GPSModule.seconds < 10)
-  {
-    Serial.print('0');
-  }
-  Serial.print(GPSModule.seconds, DEC);
-  Serial.print('.');
-  if (GPSModule.milliseconds < 10)
-  {
-    Serial.print("00");
-  }
-  else if (GPSModule.milliseconds > 9 && GPSModule.milliseconds < 100)
-  {
-    Serial.print("0");
-  }
-  Serial.println(GPSModule.milliseconds);
-  Serial.print("Date: ");
-  Serial.print(GPSModule.day, DEC);
-  Serial.print('/');
-  Serial.print(GPSModule.month, DEC);
-  Serial.print("/20");
-  Serial.println(GPSModule.year, DEC);
-  Serial.print("Fix: ");
-  Serial.print((int)GPSModule.fix);
-  Serial.print(" quality: ");
-  Serial.println((int)GPSModule.fixquality);
-  // Print GPS location data to lcd
-  if (GPSModule.fix)
-  {
+   // approximately every 2 seconds or so, print out the current stats
+  if (millis() - timersss > 1000) {
+    timersss = millis(); // reset the timer
+    Serial.print("\nTime: ");
+    if (GPSModule.hour < 10) { Serial.print('0'); }
+    Serial.print(GPSModule.hour, DEC); Serial.print(':');
+    if (GPSModule.minute < 10) { Serial.print('0'); }
+    Serial.print(GPSModule.minute, DEC); Serial.print(':');
+    if (GPSModule.seconds < 10) { Serial.print('0'); }
+    Serial.print(GPSModule.seconds, DEC); Serial.print('.');
+    if (GPSModule.milliseconds < 10) {
+      Serial.print("00");
+    } else if (GPSModule.milliseconds > 9 && GPSModule.milliseconds < 100) {
+      Serial.print("0");
+    }
+    Serial.println(GPSModule.milliseconds);
+    Serial.print("Date: ");
+    Serial.print(GPSModule.day, DEC); Serial.print('/');
+    Serial.print(GPSModule.month, DEC); Serial.print("/20");
+    Serial.println(GPSModule.year, DEC);
+    Serial.print("Fix: "); Serial.print((int)GPSModule.fix);
+    Serial.print(" quality: "); Serial.println((int)GPSModule.fixquality);
     Serial.print("Location: ");
-    Serial.print(GPSModule.latitude, 4);
-    Serial.print(GPSModule.lat);
+    Serial.print(GPSModule.latitude, 4); Serial.print(GPSModule.lat);
     Serial.print(", ");
-    Serial.print(GPSModule.longitude, 4);
-    Serial.println(GPSModule.lon);
-    Serial.print("Speed (knots): ");
-    Serial.println(GPSModule.speed);
-    Serial.print("Angle: ");
-    Serial.println(GPSModule.angle);
-    Serial.print("Altitude: ");
-    Serial.println(GPSModule.altitude);
-    Serial.print("Satellites: ");
-    Serial.println((int)GPSModule.satellites);
-    Serial.print("Antenna status: ");
-    Serial.println((int)GPSModule.antenna);
+    Serial.print(GPSModule.longitude, 4); Serial.println(GPSModule.lon);
+    Serial.print("Speed (knots): "); Serial.println(GPSModule.speed);
+    Serial.print("Angle: "); Serial.println(GPSModule.angle);
+    Serial.print("Altitude: "); Serial.println(GPSModule.altitude);
+    Serial.print("Satellites: "); Serial.println((int)GPSModule.satellites);
+    Serial.print("Antenna status: "); Serial.println((int)GPSModule.antenna);
   }
 }
