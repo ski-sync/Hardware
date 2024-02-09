@@ -6,8 +6,6 @@
 #include "component/bme_280/bme_280.h"
 #include "component/GPS/GPS.h"
 
-#define txPin 17
-#define rxPin 16
 #define GPSECHO true
 
 BLEServerManager bleServerManager;
@@ -19,18 +17,8 @@ GPS gps;
 
 void setup() { 
 
-    Serial1.begin(115200);
-    while (!Serial1) {
-        ; // wait for serial port to connect. Needed for native USB port only
-    }
-
-    // config serial communication for GPS
-    Serial2.begin(9600, SERIAL_8N1, rxPin, txPin);
-    while (!Serial2) {
-        ; // wait for serial port to connect. Needed for native USB port only
-    }
-     
-    Serial1.println("Starting program!");
+    Serial.begin(115200);
+    Serial.println("Starting program!");
 
     // Initialize and set up BLE
     bleServerManager.setupBLE();
