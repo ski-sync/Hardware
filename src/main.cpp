@@ -6,8 +6,6 @@
 #include "component/bme_280/bme_280.h"
 #include "component/GPS/GPS.h"
 
-#define GPSECHO true
-
 BLEServerManager bleServerManager;
 Fsm fsm;
 Timer timer;
@@ -37,12 +35,13 @@ void setup() {
 }
 
 void loop() {
+  gps.update();
+  // bleServerManager.sendValue((int) timer.elapsed());
+  // generate a random number between 0 and 100
   if (timer.elapsed() >= 1000) {
+    bleServerManager.sendValue(random(1000));
     mpu_6050.update();
     bme_280.update();
-    gps.update();
-    bleServerManager.sendValue((int) timer.elapsed());
-    gps.printData();
     timer.start();
   }
 }
