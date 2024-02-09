@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <Adafruit_GPS.h>
 
-#define GPSECHO true
+#define GPSECHO false
 
 class GPS
 {
