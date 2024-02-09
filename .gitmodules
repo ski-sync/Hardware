@@ -16,3 +16,6 @@
 [submodule "lib/googletest"]
 	path = lib/googletest
 	url = https://github.com/google/googletest
+[submodule "lib/Adafruit_GPS"]
+	path = lib/Adafruit_GPS
+	url = https://github.com/adafruit/Adafruit_GPS
