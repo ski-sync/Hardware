@@ -17,9 +17,11 @@ class BLEServerManager {
 private:
     BLECharacteristic *pCharacteristic;
     BLEServer *pServer;
+    static BLEServerManager *instance;
+    BLEServerManager();
 
 public:
-    BLEServerManager();
+    static BLEServerManager *getInstance();
     void setupBLE();
     void sendValue(int value);
     void sendMessage(String message);

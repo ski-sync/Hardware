@@ -5,6 +5,13 @@ BLEServerManager::BLEServerManager() {
     pServer = nullptr;
 }
 
+BLEServerManager* BLEServerManager::getInstance() {
+    if (!instance) {
+        instance = new BLEServerManager();
+    }
+    return instance;
+}
+
 void BLEServerManager::setupBLE() {
     BLEDevice::init(DEVICE_NAME);
     pServer = BLEDevice::createServer();
