@@ -4,6 +4,7 @@
 
 #include <Arduino.h>
 #include <Adafruit_MPU6050.h>
+#include "mpu_6050_config.h"
 
 
 class Mpu_6050 {
@@ -12,7 +13,7 @@ class Mpu_6050 {
     static Mpu_6050 *instance;
     Mpu_6050(mpu6050_accel_range_t accel_range);
 public:
-    static Mpu_6050 *getInstance(mpu6050_accel_range_t accel_range);
+    static Mpu_6050 *getInstance();
     void setup();
     void update();
 };

@@ -19,7 +19,7 @@ void setup() {
 
 
     // Initialize and set up the mpu_6050
-    Mpu_6050::getInstance(MPU6050_RANGE_8_G)->setup();
+    Mpu_6050::getInstance()->setup();
 
     // Initialize and set up the bme_280
     Bme_280::getInstance()->setup();
@@ -37,7 +37,7 @@ void loop() {
   // generate a random number between 0 and 100
   if (timer.elapsed() >= 1000) {
     BLEServerManager::getInstance()->sendValue(100);
-    Mpu_6050::getInstance(MPU6050_RANGE_8_G)->update();
+    Mpu_6050::getInstance()->update();
     Bme_280::getInstance()->update();
     timer.start();
   }
