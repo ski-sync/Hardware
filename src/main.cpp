@@ -8,7 +8,6 @@
 
 Fsm fsm;
 Timer timer;
-GPS gps;
 
 void setup() { 
 
@@ -26,14 +25,14 @@ void setup() {
     Bme_280::getInstance()->setup();
 
     // Initialize and set up the GPS
-    gps.setup();
+    GPS::getInstance()->setup();
 
     // Start the timer
     timer.start();
 }
 
 void loop() {
-  gps.update();
+  GPS::getInstance()->update();
   // bleServerManager.sendValue((int) timer.elapsed());
   // generate a random number between 0 and 100
   if (timer.elapsed() >= 1000) {

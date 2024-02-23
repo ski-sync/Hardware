@@ -8,10 +8,13 @@
 
 class GPS
 {
+private:
     Adafruit_GPS GPSModule;
+    static GPS *instance;
+    GPS();
 
 public:
-    GPS();
+    static GPS *getInstance();
     void setup();
     void update();
     void printData();
