@@ -22,7 +22,7 @@ private:
 
 public:
     static BLEServerManager *getInstance();
-    void setupBLE();
+    void setup();
     void sendValue(int value);
     void sendMessage(String message);
 };
