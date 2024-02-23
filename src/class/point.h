@@ -3,6 +3,10 @@
 
 #include <Arduino.h>
 
+#include <Adafruit_GPS.h>
+#include <Adafruit_BME280.h>
+#include <Adafruit_MPU6050.h>
+
 
 class point
 {
@@ -42,7 +46,7 @@ private:
     long gz;
 
 public:
-    point(/* args */);
+    point();
     ~point();
 };
 
