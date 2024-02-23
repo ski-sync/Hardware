@@ -7,6 +7,14 @@ Mpu_6050::Mpu_6050(mpu6050_accel_range_t accel_range)
     _accel_range = accel_range;
 }
 
+Mpu_6050 *Mpu_6050::getInstance(mpu6050_accel_range_t accel_range)
+{
+    if (!instance) {
+        instance = new Mpu_6050(accel_range);
+    }
+    return instance;
+}
+
 void Mpu_6050::setup()
 {
 

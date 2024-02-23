@@ -8,7 +8,6 @@
 
 Fsm fsm;
 Timer timer;
-Mpu_6050 mpu_6050(MPU6050_RANGE_8_G);
 GPS gps;
 
 void setup() { 
@@ -17,11 +16,11 @@ void setup() {
     Serial.println("Starting program!");
 
     // Initialize and set up the BLE server
-    BLEServerManager::getInstance()->setupBLE();
+    BLEServerManager::getInstance()->setup();
 
 
     // Initialize and set up the mpu_6050
-    mpu_6050.setup();
+    Mpu_6050::getInstance(MPU6050_RANGE_8_G)->setup();
 
     // Initialize and set up the bme_280
     Bme_280::getInstance()->setup();
@@ -39,8 +38,8 @@ void loop() {
   // generate a random number between 0 and 100
   if (timer.elapsed() >= 1000) {
     BLEServerManager::getInstance()->sendValue(100);
-    mpu_6050.update();
-    bme_280.update();
+    Mpu_6050::getInstance(MPU6050_RANGE_8_G)->update();
+    Bme_280::getInstance()->update();
     timer.start();
   }
 }

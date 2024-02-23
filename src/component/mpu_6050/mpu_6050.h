@@ -9,8 +9,10 @@
 class Mpu_6050 {
     Adafruit_MPU6050 _mpu;
     mpu6050_accel_range_t _accel_range;
-public:
+    static Mpu_6050 *instance;
     Mpu_6050(mpu6050_accel_range_t accel_range);
+public:
+    static Mpu_6050 *getInstance(mpu6050_accel_range_t accel_range);
     void setup();
     void update();
 };
