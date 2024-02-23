@@ -9,7 +9,6 @@
 Fsm fsm;
 Timer timer;
 Mpu_6050 mpu_6050(MPU6050_RANGE_8_G);
-Bme_280 bme_280;
 GPS gps;
 
 void setup() { 
@@ -25,7 +24,7 @@ void setup() {
     mpu_6050.setup();
 
     // Initialize and set up the bme_280
-    bme_280.setup();
+    Bme_280::getInstance()->setup();
 
     // Initialize and set up the GPS
     gps.setup();

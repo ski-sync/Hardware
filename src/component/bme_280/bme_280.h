@@ -9,8 +9,10 @@
 
 class Bme_280 {
     Adafruit_BME280 _bme;
-public:
+    static Bme_280 *instance;
     Bme_280();
+public:
+    static Bme_280 *getInstance();
     void setup();
     void update();
 };
