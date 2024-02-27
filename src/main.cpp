@@ -6,42 +6,39 @@
 #include "component/bme_280/bme_280.h"
 #include "component/GPS/GPS.h"
 
-BLEServerManager bleServerManager;
 Fsm fsm;
 Timer timer;
-Mpu_6050 mpu_6050(MPU6050_RANGE_8_G);
-Bme_280 bme_280;
-GPS gps;
 
 void setup() { 
 
     Serial.begin(115200);
     Serial.println("Starting program!");
 
-    // Initialize and set up BLE
-    bleServerManager.setupBLE();
+    // Initialize and set up the BLE server
+    BLEServerManager::getInstance()->setup();
+
 
     // Initialize and set up the mpu_6050
-    mpu_6050.setup();
+    Mpu_6050::getInstance()->setup();
 
     // Initialize and set up the bme_280
-    bme_280.setup();
+    Bme_280::getInstance()->setup();
 
     // Initialize and set up the GPS
-    gps.setup();
+    GPS::getInstance()->setup();
 
     // Start the timer
     timer.start();
 }
 
 void loop() {
-  gps.update();
+  GPS::getInstance()->update();
   // bleServerManager.sendValue((int) timer.elapsed());
   // generate a random number between 0 and 100
   if (timer.elapsed() >= 1000) {
-    bleServerManager.sendValue(random(1000));
-    mpu_6050.update();
-    bme_280.update();
+    BLEServerManager::getInstance()->sendValue(100);
+    Mpu_6050::getInstance()->update();
+    Bme_280::getInstance()->update();
     timer.start();
   }
 }

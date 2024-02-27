@@ -5,7 +5,14 @@ BLEServerManager::BLEServerManager() {
     pServer = nullptr;
 }
 
-void BLEServerManager::setupBLE() {
+BLEServerManager* BLEServerManager::getInstance() {
+    if (!instance) {
+        instance = new BLEServerManager();
+    }
+    return instance;
+}
+
+void BLEServerManager::setup() {
     BLEDevice::init(DEVICE_NAME);
     pServer = BLEDevice::createServer();
     pServer->setCallbacks(new ServerCallbacks());

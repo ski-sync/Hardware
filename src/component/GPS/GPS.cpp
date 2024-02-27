@@ -7,6 +7,15 @@ GPS::GPS()
   GPSModule = Adafruit_GPS(&Serial2);
 }
 
+GPS *GPS::getInstance()
+{
+  if (!instance)
+  {
+    instance = new GPS();
+  }
+  return instance;
+}
+
 void GPS::setup()
 {
   GPSModule.begin(9600); // Set the baud rate of GPS module

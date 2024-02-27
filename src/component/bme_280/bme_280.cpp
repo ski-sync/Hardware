@@ -4,6 +4,13 @@ Bme_280::Bme_280() {
     _bme = Adafruit_BME280();
 }
 
+Bme_280 *Bme_280::getInstance() {
+    if (instance == NULL) {
+        instance = new Bme_280();
+    }
+    return instance;
+}
+
 void Bme_280::setup() {
     while (!_bme.begin()) {
         Serial.println("Could not find a valid BME280 sensor, check wiring!");
